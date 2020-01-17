@@ -7,26 +7,94 @@
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
 var factorial = function(n) {
+  // have a way to keep track of previous iterations of this function
+  // check if n - 1 will equal 0 
+  if (n < 0) {
+  	return null;
+  }
+  if (n === 0){
+    // if it does equal 0 then return the total
+    return 1;
+  } else {
+    // if it doesn't equal zero then add to the tally and call factorial function 
+    return n * factorial(n - 1);
+  }
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
+	// check if empty array 
+	if (array.length === 0){
+	  // return 0
+	  return 0;
+	} else {
+	  // return the array calling the array basically adding together 
+	  return array[0] + sum(array.slice(1))
+	}
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+	// check if empty array
+	if (array.length === 0){
+		return 0;
+	} else {
+	// use recursion to fall the function again and again 
+	// check if there is another array within element. 
+	  if (Array.isArray(array[0]) && array[0].length > 1) {
+	  	return array[0][0]+ arraySum(array[0].slice(1))
+	  } 
+
+	  if (Array.isArray(array[0])) {
+	  	return array[0][0] + arraySum(array[1].slice(1))
+
+	  } else {
+	  	return array[0] + arraySum(array.slice(1));
+	  }
+
+    }
+
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+	// check if n equals 0 or 1 
+	if (n === 0){
+		return true;
+	}
+	  // if 0 it's even
+	if (n === 1) {
+		return false;
+	  // if 1 it's odd
+	}
+    else {
+    	if (n > 0){
+            return isEven(n-2);
+    	} else {
+    		return isEven(n+2);
+    	}
+    }
+	// if doesn't equal above then divide by 2 
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+	// check if n = 0 
+	if (n === 0 || n - 1 === 0){
+	  // if it does, return 0
+	  return 0;
+	} else {
+	  // if it doesn't call the function 
+	  if ( n > 0){
+	  	return (n - 1) + sumBelow(n - 1);
+	  } else {
+	  	return (n + 1) + sumBelow(n + 1);
+	  }
+	}
 };
 
 // 6. Get the integers within a range (x, y).
